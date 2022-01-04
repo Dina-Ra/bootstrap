@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show user</title>
+    <h1>Show user</h1>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Age</th>
+        <th>Roles</th>
+
+    </tr>
+    <form th:method="GET" th:action="@{/admin/showUser}" th:object="${user}">
+        <tr>
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getSurname()}"></td>
+            <td th:text="${user.getAge()}"></td>
+            <td th:text="${user.getRoles()}"></td>
+
+        </tr>
+    </form>
+</table>
+<br><br>
+<input type="button" value="SHOW_USERS" onclick="window.location.href = '/admin/'">
+<br><br>
+</body>
+</html>

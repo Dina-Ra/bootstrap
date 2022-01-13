@@ -1,31 +1,138 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+
     <title>User</title>
-    <h1>User</h1>
 </head>
 <body>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Surname</th>
-        <th>Age</th>
+<form th:method="GET" th:action="@{/user/}" th:object="${user}">
+<div class="d-flex bd-highlight bg-dark text-white">
+    <div class="p-2 bd-highlight">
+                <span>
+                    <span class="navbar-brand font-weight-bold" th:text="${user.getUsername()}"></span>
+                    <span class="navbar-brand" th:text="' with roles:'"></span>
+                    <span class="navbar-brand" th:text="${user.getRolesToString(user.getRoles())}">
+                          </span>
+                </span>
+    </div>
+    <div class="ml-auto p-2 bd-highlight">
+        <input type="button" class="btn btn-dark text-secondary" th:value="Logout" onclick="window.location.href = '/logout'">
+    </div>
+</div>
 
-    </tr>
-    <form th:method="GET" th:action="@{/user/}" th:object="${user}">
-        <tr>
-            <td th:text="${user.getName()}"></td>
-            <td th:text="${user.getSurname()}"></td>
-            <td th:text="${user.getAge()}"></td>
-        </tr>
-    </form>
-</table>
 
-<br><br>
+<div class="row" style="margin: 0px; height: 100vh; position: relative;">
+    <div class="col-2" style="position: absolute; left: 0; height: 100%;  padding-top: 20px; padding-right: 0px;">
+        <div class="list-group list-group-flush" id="myList" role="tablist">
+            <a class="list-group-item list-group-item-action active" data-toggle="list" href="#user" role="tab">User</a>
 
-<input type="button" value="Logout" onclick="window.location.href = '/logout'">
-<br><br>
+        </div>
+    </div>
+    <div class="col-10" style="position: absolute; right: 0; background-color: rgb(243, 245, 247); height: 100%; padding: 30px;">
+        <div class="tab-content">
+
+            <div class="tab-pane active" id="user" role="tabpanel">
+                <h1 style="margin: 10px;">User-information panel</h1>
+
+                <div class="card" style="border-color: rgb(211, 209, 209);">
+                    <div class="card-header">
+                        <h4>About user</h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td th:text="${user.getId()}"></td>
+                                <td th:text="${user.getName()}"></td>
+                                <td th:text="${user.getAge()}"></td>
+                                <td th:text="${user.getSurname()}"></td>
+                                <td th:text="${user.getUsername()}"></td>
+                                <td th:text="${user.getRolesToString(user.getRoles())}"></td>
+<!--                                <td>-->
+<!--                                    <div th:each="role : ${user.getRoles()}">-->
+<!--                                        <p th:text="${role}"></p>-->
+<!--                                    </div>-->
+<!--                                </td>-->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</form>
+
+    <!--
+            <script>
+                $(function () {
+                $('#myList a:last-child').tab('show')
+                })
+            </script>
+
+         -->
+    <!-- Вариант 1: пакет jQuery и Bootstrap (включает Popper) -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script> -->
+
+    <!-- Вариант 2: Отдельные JS для Popper и Bootstrap -->
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+
 </body>
 </html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>User</title>-->
+<!--    <h1>User</h1>-->
+<!--</head>-->
+<!--<body>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <th>Name</th>-->
+<!--        <th>Surname</th>-->
+<!--        <th>Age</th>-->
+
+<!--    </tr>-->
+<!--    <form th:method="GET" th:action="@{/user/}" th:object="${user}">-->
+<!--        <tr>-->
+<!--            <td th:text="${user.getName()}"></td>-->
+<!--            <td th:text="${user.getSurname()}"></td>-->
+<!--            <td th:text="${user.getAge()}"></td>-->
+<!--        </tr>-->
+<!--    </form>-->
+<!--</table>-->
+
+<!--<br><br>-->
+
+<!--<input type="button" value="Logout" onclick="window.location.href = '/logout'">-->
+<!--<br><br>-->
+<!--</body>-->
+<!--</html>-->

@@ -2,6 +2,7 @@ package com.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -15,11 +16,11 @@ public class LoginController {
 
     @GetMapping(value = "logout")
     public String getLogoutPage() {
-        return "logout";
+        return "login";
     }
 
     @GetMapping(value = "error")
-    public String getErrorPage() {
+    public static String getErrorPage() {
         return "error";
     }
 }

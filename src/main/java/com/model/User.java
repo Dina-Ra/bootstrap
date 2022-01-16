@@ -2,9 +2,13 @@ package com.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,6 +16,8 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name="users")
 public class User implements UserDetails {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -26,7 +32,7 @@ public class User implements UserDetails {
     private String username;
     @Column(name = "password")
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
@@ -155,6 +161,7 @@ public class User implements UserDetails {
     }
 
     public String getRolesToString(Set<String> roles) {
-        return roles.stream().collect(Collectors.toList()).toString();
+        roles = roles.stream().map(s -> s.replaceFirst("ROLE_", "")).collect(Collectors.toSet());
+        return String.join(" ", roles);
     }
 }

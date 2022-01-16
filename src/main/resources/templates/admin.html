@@ -17,7 +17,7 @@
                 <span>
                     <span class="navbar-brand font-weight-bold" th:text="${user.getUsername()}"></span>
                     <span class="navbar-brand" th:text="' with roles:'"></span>
-                    <span class="navbar-brand" th:text="${user.getRoles()}">
+                    <span class="navbar-brand" th:text="${user.getRolesToString(user.getRoles())}">
                           </span>
                 </span>
         </div>
@@ -74,7 +74,6 @@
                                         <td th:text="${user.getAge()}"></td>
                                         <td th:text="${user.getSurname()}"></td>
                                         <td th:text="${user.getUsername()}"></td>
-                                        <td th:text="${user.getPassword()}"></td>
                                         <td th:text="${user.getRolesToString(user.getRoles())}"></td>
                                         <td>
                                             <button type="button" class="btn btn-primary" data-toggle="modal"
@@ -101,10 +100,10 @@
                                                                         <input th:type="text" th:class="form-control" th:value="*{age}" th:id="age" th:name="age">
                                                                     <label for="surname"><h5>Surname</h5></label>
                                                                         <input th:type="text" th:class="form-control" th:value="*{surname}" th:id="surname" th:name="surname">
-                                                                    <label for="username"><h5>Username</h5></label>
+                                                                    <label for="username"><h5>Email</h5></label>
                                                                         <input th:type="text" th:class="form-control" th:value="*{username}" th:id="username" th:name="username">
                                                                     <label for="password"><h5>Password</h5></label>
-                                                                        <input th:type="text" th:class="form-control" th:value="*{password}" th:id="password" th:name="password">
+                                                                        <input th:type="text" th:class="form-control" th:id="password" th:name="password">
                                                                 </div>
                                                                 <div class="form-group" style="text-align: center;" >
                                                                     <label for="roles"><h5>Roles</h5></label>
@@ -149,12 +148,10 @@
                                                                     <input th:type="text" th:class="form-control" th:value="*{name}">
                                                                     <label for="age"><h5>Age</h5></label>
                                                                     <input th:type="text" th:class="form-control" th:value="*{age}">
-                                                                    <label for="surname"><h5>Surame</h5></label>
+                                                                    <label for="surname"><h5>Surname</h5></label>
                                                                     <input th:type="text" th:class="form-control" th:value="*{surname}">
-                                                                    <label for="username"><h5>Username</h5></label>
+                                                                    <label for="username"><h5>Email</h5></label>
                                                                     <input th:type="text" th:class="form-control" th:value="*{username}">
-                                                                    <label for="password"><h5>Password</h5></label>
-                                                                    <input th:type="text" th:class="form-control" th:value="*{password}">
                                                                     <label for="roles"><h5>Roles</h5></label>
                                                                     <input th:type="text" th:class="form-control" th:value="*{roles}">
 
@@ -190,7 +187,7 @@
                                         <input th:type="text" id="age" th:class="form-control" th:name="age">
                                         <label for="surname" style="margin: 0;"><h6>Surname</h6></label>
                                         <input th:type="text" id="surname" th:class="form-control" th:name="surname">
-                                        <label for="username" style="margin: 0;"><h6>Username</h6></label>
+                                        <label for="username" style="margin: 0;"><h6>Email</h6></label>
                                         <input th:type="text" id="username" th:class="form-control" th:name="username">
                                         <label for="password" style="margin: 0;"><h6>Password</h6></label>
                                         <input th:type="text" id="password" th:class="form-control" th:name="password">

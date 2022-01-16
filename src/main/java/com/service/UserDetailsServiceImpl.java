@@ -1,7 +1,6 @@
 package com.service;
 
-import com.controller.LoginController;
-import com.dao.UserDao;
+import com.dao.UserRepository;
 import com.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,17 +15,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserDao userDao;
+    private UserService userService;
 
     @Autowired
-    public UserDetailsServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UserDetailsServiceImpl (UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-
-        User user = userDao.getUser(s);
+        System.out.println(s);
+        User user = userService.getUser(s);
+        System.out.println(user);
+//        user.getAuthorities().size();
+//        if(user == null) {
+//            throw new UsernameNotFoundException(String.format("User '%s' not found", s));
+//        }
         return user;
     }
 }
